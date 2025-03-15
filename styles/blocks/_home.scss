@@ -1,0 +1,81 @@
+.home {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 100px;
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        row-gap: 20px
+    }
+
+    &__name {
+        @include fluid-text(28, 24);
+    }
+
+    &__advokat {
+        font-weight: 800;
+        @include fluid-text(100, 60);
+    }
+
+    &__description {
+        @include fluid-text(20, 20);
+    }
+
+    &__img {
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 70%;
+            left: -15%;
+            width: 103px;
+            height: 30px;
+            background: url('/images/riski.svg') center/cover no-repeat;
+        }
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 56px;
+            background: url('/images/plus.svg') center/cover no-repeat;
+        }
+
+        
+
+        &-border {    
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 10px;
+                left: -20px;
+                height: 100%;
+                width: 100%;
+                background: transparent;
+                border: var(--border);
+                border-radius: 80% 60% 70% 70%;
+            }
+        }
+
+        &-avatar {
+            border-radius: 60% 50% 70% 50%;
+
+            @include mobile {
+
+            }
+        }
+    }
+
+    @include mobile {
+        flex-direction: column-reverse;
+        align-items: start;
+        row-gap: 50px;
+    }
+}

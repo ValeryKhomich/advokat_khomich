@@ -1,0 +1,17 @@
+.about {
+
+    &__title {
+        @include fluid-text(100, 40);
+
+        font-weight: 800;
+        color: var(--color_yellow);
+        padding-bottom: 10px;
+    }
+
+    &__description {
+        @include fluid-text(20, 16);
+        font-weight: 400;
+        padding-bottom: 32px;
+    }
+}
+

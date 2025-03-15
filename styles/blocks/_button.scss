@@ -1,0 +1,43 @@
+.button {
+    @include flex-center(true);
+
+    position: relative;
+    height: 68px;
+    width: 300px;
+    padding-inline: 35px;
+    font-size: 20px;
+    color: var(--color_blue-dark);
+    background: var(--color_yellow-light);
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--color_yellow);
+        border-radius: 14px;
+        transform: translate(7px, 7px);
+    }
+
+    &::after {
+        content: 'Получить консультацию';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        padding-top: 20px;
+        text-align: center;
+        border: var(--border);
+        border-radius: 14px;
+    }
+
+    @include hover {
+        font-size: 22px;
+        transition-duration: var(--transition-duration);
+        
+    }
+
+}

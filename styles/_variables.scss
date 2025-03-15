@@ -1,0 +1,18 @@
+:root {
+    --color_blue-dark: #03045E;
+    --color_brown-dark: #474306;
+    --color_yellow: #F5EE84;
+    --color_yellow-light: #FBF8CC;
+
+    --border: 1px solid var(--color_blue-dark);
+
+    --font-family-base: 'Poppins', sans-serif;
+
+    --container-width: 1240px;
+    --container-padding-x: 100px;
+    --container-padding-x-mobile: 15px;
+
+    --section-padding-y: 70px;
+
+    --transition-duration: 0.2s;
+}

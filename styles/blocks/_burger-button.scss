@@ -1,0 +1,23 @@
+.burger-button {
+    @include reset-button;
+    @include square(48px);
+
+    position: relative;
+
+    &::after {
+        @include abs-center;
+
+        content: '';
+        width: 50%;
+        height: 2px;
+        background-color: var(--color_blue-dark);
+        border-radius: 5px;
+        /* это рисуем полоски сверху и снизу, смещение по осям X и Y */
+        box-shadow: 0 -8px  var(--color_blue-dark), 0 8px  var(--color_blue-dark);
+        
+    }
+
+    &:hover {
+        background-color: lightcoral;
+    }
+}
