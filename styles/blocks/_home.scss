@@ -8,7 +8,7 @@
         display: flex;
         flex-direction: column;
         justify-content: center;
-        row-gap: 20px
+        row-gap: 20px;
     }
 
     &__name {
@@ -17,15 +17,27 @@
 
     &__advokat {
         font-weight: 800;
-        @include fluid-text(100, 60);
+        @include fluid-text(80, 60);
+        line-height: 0.9;
+    }
+
+    // H1 — видимый, стилизован как подзаголовок
+    &__title {
+        @include fluid-text(22, 17);
+        font-weight: 400;
+        color: rgba(3, 4, 94, 0.55);
+        letter-spacing: 0.01em;
+        margin-top: -6px;
     }
 
     &__description {
         @include fluid-text(20, 20);
+        line-height: 1.7;
     }
 
     &__img {
         position: relative;
+        flex-shrink: 0;
 
         &::after {
             content: '';
@@ -47,10 +59,7 @@
             background: url('/images/plus.svg') center/cover no-repeat;
         }
 
-        
-
-        &-border {    
-
+        &-border {
             &::after {
                 content: '';
                 position: absolute;
@@ -66,10 +75,6 @@
 
         &-avatar {
             border-radius: 60% 50% 70% 50%;
-
-            @include mobile {
-
-            }
         }
     }
 

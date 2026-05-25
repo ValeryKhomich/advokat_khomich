@@ -1,0 +1,262 @@
+// ─── Анимации для блока ст. 124 ─────────────────────────────────────────────
+
+@keyframes lawEntrance {
+    0% {
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+    }
+    65% {
+        transform: translateY(-8px) scale(1.015);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes lawGlow {
+    0%, 100% {
+        box-shadow:
+            0 0 0 0 rgba(245, 184, 0, 0),
+            0 8px 40px rgba(245, 184, 0, 0.15);
+    }
+    50% {
+        box-shadow:
+            0 0 0 12px rgba(245, 184, 0, 0.1),
+            0 12px 60px rgba(245, 184, 0, 0.45);
+    }
+}
+
+@keyframes badgePulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 4px 18px rgba(245, 140, 0, 0.35);
+    }
+    50% {
+        transform: scale(1.05);
+        box-shadow: 0 6px 28px rgba(245, 140, 0, 0.65);
+    }
+}
+
+@keyframes highlightShimmer {
+    0% { background-position: -200% center; }
+    100% { background-position: 200% center; }
+}
+
+// ─── Сетка гонорара ──────────────────────────────────────────────────────────
+
+.fees {
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+        margin-bottom: 24px;
+
+        @include tablet {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @include mobile {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    &__note {
+        padding: 18px 22px;
+        background: rgba(245, 238, 132, 0.28);
+        border-left: 3px solid var(--color_yellow);
+        border-radius: 0 10px 10px 0;
+        font-size: 14px;
+        line-height: 1.7;
+        color: rgba(3, 4, 94, 0.75);
+
+        & + & {
+            margin-top: 12px;
+        }
+    }
+
+    // ── Блок ст. 124 ─────────────────────────────────────────────────────────
+
+    &__law-block {
+        margin-top: 24px;
+        padding: 32px 36px;
+        background: linear-gradient(135deg, #fffbea 0%, #fff8d0 60%, #fff3c4 100%);
+        border: 2.5px solid #f5b800;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+
+        // Декоративная полоса сверху
+        &::before {
+            content: '';
+            position: absolute;
+            inset: 0 0 auto 0;
+            height: 5px;
+            background: linear-gradient(90deg, #f5b800, #ff8c00, #f5b800);
+            background-size: 200% 100%;
+            animation: highlightShimmer 3s linear infinite;
+        }
+
+        // Старт — скрыт, ждёт появления в поле зрения
+        opacity: 0;
+        transform: translateY(50px) scale(0.95);
+        transition: none;
+
+        &.is-visible {
+            animation:
+                lawEntrance 0.75s cubic-bezier(0.34, 1.56, 0.64, 1) forwards,
+                lawGlow 3.5s ease-in-out 0.75s infinite;
+        }
+
+        @include mobile {
+            padding: 24px 20px;
+            border-radius: 14px;
+        }
+    }
+
+    &__law-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: linear-gradient(135deg, #f5b800 0%, #ff8c00 100%);
+        color: #fff;
+        font-weight: 800;
+        font-size: 13px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        padding: 9px 20px;
+        border-radius: 50px;
+        margin-bottom: 20px;
+        animation: badgePulse 2.2s ease-in-out infinite;
+        user-select: none;
+
+        svg {
+            flex-shrink: 0;
+        }
+
+        @include mobile {
+            font-size: 11.5px;
+            padding: 8px 14px;
+        }
+    }
+
+    &__law-text {
+        font-size: 15px;
+        line-height: 1.75;
+        color: rgba(3, 4, 94, 0.82);
+        margin: 0 0 18px;
+
+        strong {
+            color: var(--color_blue-dark);
+        }
+
+        @include mobile {
+            font-size: 14px;
+        }
+    }
+
+    &__law-highlight {
+        display: flex;
+        align-items: flex-start;
+        gap: 14px;
+        background: #fff;
+        border-left: 4px solid #f5b800;
+        border-radius: 0 12px 12px 0;
+        padding: 16px 20px;
+        margin-bottom: 18px;
+        font-size: 15.5px;
+        line-height: 1.65;
+        color: var(--color_blue-dark);
+        box-shadow: 0 2px 12px rgba(245, 184, 0, 0.18);
+
+        svg {
+            flex-shrink: 0;
+            margin-top: 1px;
+            color: #f5a000;
+        }
+
+        strong {
+            color: #c85a00;
+        }
+
+        @include mobile {
+            font-size: 14px;
+            gap: 10px;
+            padding: 14px 16px;
+        }
+    }
+
+    &__law-sub {
+        font-size: 13px;
+        line-height: 1.65;
+        color: rgba(3, 4, 94, 0.55);
+        margin: 0;
+        font-style: italic;
+    }
+}
+
+// ─── Карточки цен (стиль плиток как в бургер-меню) ───────────────────────────
+
+.fee-card {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 24px 22px;
+    box-shadow: 0 2px 12px rgba(3, 4, 94, 0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    @include hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(3, 4, 94, 0.13);
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: rgba(3, 4, 94, 0.06);
+        color: #b8870b;
+        flex-shrink: 0;
+
+        svg {
+            width: 22px;
+            height: 22px;
+        }
+    }
+
+    &__title {
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--color_blue-dark);
+        line-height: 1.55;
+        flex: 1;
+    }
+
+    &__bottom {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+    }
+
+    &__price {
+        font-size: clamp(20px, 2vw, 24px);
+        font-weight: 800;
+        color: var(--color_blue-dark);
+        letter-spacing: -0.02em;
+    }
+
+    &__unit {
+        font-size: 11px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        color: rgba(3, 4, 94, 0.42);
+    }
+}

@@ -1,23 +1,66 @@
 .burger-button {
     @include reset-button;
-    @include square(48px);
+    @include square(44px);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
 
     position: relative;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 2px solid var(--color_blue-dark);
+    background: transparent;
 
-    &::after {
-        @include abs-center;
+    transition:
+        background-color 0.25s ease,
+        box-shadow       0.25s ease,
+        border-color     0.25s ease;
 
-        content: '';
-        width: 50%;
+    // — каждая линия —
+    &__line {
+        display: block;
         height: 2px;
         background-color: var(--color_blue-dark);
-        border-radius: 5px;
-        /* это рисуем полоски сверху и снизу, смещение по осям X и Y */
-        box-shadow: 0 -8px  var(--color_blue-dark), 0 8px  var(--color_blue-dark);
-        
+        border-radius: 2px;
+
+        transition:
+            transform  0.38s cubic-bezier(0.4, 0, 0.2, 1),
+            opacity    0.25s cubic-bezier(0.4, 0, 0.2, 1),
+            width      0.3s  cubic-bezier(0.4, 0, 0.2, 1);
+
+        width: 20px;
     }
 
-    &:hover {
-        background-color: lightcoral;
+    // — hover —
+    @include hover {
+        background-color: rgba(3, 4, 94, 0.06);
+        box-shadow: 0 0 0 3px rgba(3, 4, 94, 0.1);
+    }
+
+    // — активное состояние: гамбургер → × —
+    &.is-active {
+        background: rgba(3, 4, 94, 0.06);
+        box-shadow: 0 0 0 3px rgba(3, 4, 94, 0.08);
+
+        // верхняя → правая ветвь ×
+        .burger-button__line:nth-child(1) {
+            width: 20px;
+            transform: translateY(7px) rotate(45deg);
+        }
+
+        // средняя исчезает
+        .burger-button__line:nth-child(2) {
+            opacity: 0;
+            width: 0;
+        }
+
+        // нижняя → левая ветвь ×
+        .burger-button__line:nth-child(3) {
+            width: 20px;
+            transform: translateY(-7px) rotate(-45deg);
+        }
     }
 }

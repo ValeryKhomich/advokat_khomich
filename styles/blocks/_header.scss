@@ -9,12 +9,56 @@
     }
 
     &__logo {
-        @include fluid-text(24, 16);
-        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        text-decoration: none;
 
         @include mobile {
-            flex-grow: 2;
+            flex-grow: 1;
         }
+    }
+
+    &__logo-scales {
+        width: clamp(32px, 3.4vw, 44px);
+        height: clamp(32px, 3.4vw, 44px);
+        flex-shrink: 0;
+        color: #b8870b;
+        stroke: currentColor;
+        fill: none;
+        filter: drop-shadow(0 1px 3px rgba(184, 135, 11, 0.3));
+        transition: transform 0.3s ease, filter 0.3s ease;
+
+        .header__logo:hover & {
+            transform: scale(1.08) rotate(-5deg);
+            filter: drop-shadow(0 2px 7px rgba(184, 135, 11, 0.55));
+        }
+    }
+
+    &__logo-text {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        line-height: 1;
+    }
+
+    &__logo-name {
+        font-family: 'Playfair Display', Georgia, 'Times New Roman', serif;
+        font-weight: 700;
+        font-size: clamp(17px, 1.8vw, 24px);
+        color: var(--color_blue-dark);
+        letter-spacing: 0.01em;
+        white-space: nowrap;
+    }
+
+    &__logo-sub {
+        font-family: var(--font-family-base);
+        font-weight: 500;
+        font-size: clamp(8px, 0.7vw, 10px);
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        color: #b8870b;
+        padding-left: 0.1em;
     }
 
     &__menu {
@@ -23,7 +67,7 @@
         &-list {
             display: flex;
             align-items: center;
-            column-gap: 60px;
+            column-gap: clamp(24px, 3.5vw, 52px);
         }
 
         &-item {
@@ -44,30 +88,9 @@
                 background-color: var(--color_blue-dark);
                 transition-duration: var(--transition-duration);
             }
-            
+
             &:hover::after {
                 width: 100%;
-            }
-        }
-        
-    }
-
-    &__second-menu {
-        
-        &-list {
-            display: flex;
-            align-items: center;
-            column-gap: 40px;
-
-            @include mobile {
-                column-gap: 20px;
-            }
-        }
-
-        &-img {
-
-            &:hover {
-                filter: brightness(0) saturate(100%) invert(50%) sepia(100%) saturate(1000%) hue-rotate(200deg);
             }
         }
     }

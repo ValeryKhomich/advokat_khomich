@@ -1,0 +1,175 @@
+// ─── Анимация кнопки «Позвонить» ─────────────────────────────────────────────
+
+@keyframes callPulse {
+    0%   { box-shadow: 0 0 0 0 rgba(184, 135, 11, 0.8); }
+    65%  { box-shadow: 0 0 0 14px rgba(184, 135, 11, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(184, 135, 11, 0); }
+}
+
+@keyframes callArrow {
+    0%, 100% { transform: translateX(0); }
+    50%       { transform: translateX(4px); }
+}
+
+// ─── Плитки: адрес + телефон ─────────────────────────────────────────────────
+
+.contacts__tiles {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.contact-tile {
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 26px 22px;
+    box-shadow: 0 2px 12px rgba(3, 4, 94, 0.07);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    @include hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(3, 4, 94, 0.13);
+    }
+
+    &__icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 12px;
+        background: rgba(3, 4, 94, 0.06);
+        color: #b8870b;
+        flex-shrink: 0;
+
+        svg {
+            width: 22px;
+            height: 22px;
+        }
+    }
+
+    &__label {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: rgba(3, 4, 94, 0.38);
+        margin-top: 2px;
+    }
+
+    &__value {
+        font-size: clamp(15px, 1.5vw, 18px);
+        font-weight: 600;
+        color: var(--color_blue-dark);
+        line-height: 1.4;
+
+        a {
+            color: var(--color_blue-dark);
+            text-decoration: none;
+
+            @include hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    &__cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        margin-top: auto;
+        padding: 7px 14px;
+        background: #b8870b;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        border-radius: 50px;
+        transition: background 0.2s ease, gap 0.2s ease;
+
+        // пульсирующее кольцо
+        animation: callPulse 2s ease-out infinite;
+
+        svg {
+            animation: callArrow 1.2s ease-in-out infinite;
+        }
+    }
+
+    // ── Модификатор: плитка-телефон (вся кликабельна) ────────────────────────
+
+    &--phone {
+        text-decoration: none;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition:
+            transform    0.2s ease,
+            box-shadow   0.2s ease,
+            border-color 0.2s ease;
+
+        @include hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(184, 135, 11, 0.22);
+            border-color: #b8870b;
+
+            .contact-tile__cta {
+                background: #9a6f09;
+                gap: 10px;
+                animation-play-state: paused;
+
+                svg { animation-play-state: paused; }
+            }
+        }
+    }
+}
+
+// ─── Кнопки соцсетей — 3 в ряд ───────────────────────────────────────────────
+
+.contacts__socials {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.contacts__social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 12px;
+
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(3, 4, 94, 0.07);
+    text-decoration: none;
+    color: var(--color_blue-dark);
+    font-weight: 600;
+    font-size: clamp(13px, 1.2vw, 16px);
+
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+    @include hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 24px rgba(3, 4, 94, 0.13);
+    }
+
+    img {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+    }
+
+    // на очень узких экранах текст скрываем — остаётся только иконка
+    @include mobile {
+        gap: 8px;
+        padding: 16px 8px;
+
+        span {
+            font-size: 12px;
+        }
+    }
+}

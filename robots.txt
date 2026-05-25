@@ -1,0 +1,17 @@
+# Файл robots.txt для сайта адвоката Хомич Евгении
+User-agent: *
+Allow: /
+
+# Запрещаем сканирование служебных файлов и папок
+Disallow: /admin/
+Disallow: /wp-admin/
+Disallow: /includes/
+Disallow: /logs/
+Disallow: /cgi-bin/
+Disallow: /*.php$
+Disallow: /*.inc$
+Disallow: /*.sql$
+Disallow: /*.gz$
+
+# Указываем путь к Sitemap (ЗАМЕНИТЕ на ваш реальный адрес!)
+Sitemap: https://advokat-khomich.by/sitemap.xml

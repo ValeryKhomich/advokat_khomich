@@ -1,3 +1,19 @@
+// ─── Анимация пульсирующего кольца ───────────────────────────────────────────
+
+@keyframes btnPulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(245, 184, 0, 0.85);
+    }
+    65% {
+        box-shadow: 0 0 0 22px rgba(245, 184, 0, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(245, 184, 0, 0);
+    }
+}
+
+// ─── Базовая кнопка ──────────────────────────────────────────────────────────
+
 .button {
     @include flex-center(true);
 
@@ -9,6 +25,7 @@
     color: var(--color_blue-dark);
     background: var(--color_yellow-light);
 
+    // жёлтая «тень» со смещением
     &::before {
         content: '';
         position: absolute;
@@ -21,6 +38,7 @@
         transform: translate(7px, 7px);
     }
 
+    // видимая грань кнопки + текст + пульс
     &::after {
         content: 'Получить консультацию';
         position: absolute;
@@ -32,12 +50,28 @@
         text-align: center;
         border: var(--border);
         border-radius: 14px;
+
+        // пульсирующее золотое кольцо
+        animation: btnPulse 2.2s ease-out infinite;
     }
 
     @include hover {
         font-size: 22px;
         transition-duration: var(--transition-duration);
-        
-    }
 
+        // при наведении — пауза анимации, фиксируем свечение
+        &::after {
+            animation-play-state: paused;
+            box-shadow: 0 0 0 6px rgba(245, 184, 0, 0.4);
+        }
+    }
+}
+
+// ─── Кнопка в герое — полная ширина на мобильном ────────────────────────────
+// Этот блок должен быть ПОСЛЕ .button чтобы перебить width: 300px в каскаде
+
+.home__button {
+    @include mobile {
+        width: 100%;
+    }
 }

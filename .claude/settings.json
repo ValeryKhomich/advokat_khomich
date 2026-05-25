@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sass styles/styles.scss styles/styles.css --style=expanded --source-map --quiet-deps)",
+      "Bash(/usr/local/bin/sass styles/styles.scss styles/styles.css --no-source-map)",
+      "Bash(echo \"Exit code: $?\")"
+    ]
+  }
+}
