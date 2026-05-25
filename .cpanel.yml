@@ -1,0 +1,5 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/azerskay/public_html/advokat-khomich.by/
+    - /bin/cp -rf . $DEPLOYPATH
