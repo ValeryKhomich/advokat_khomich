@@ -159,11 +159,34 @@
     }
 }
 
-// ─── Кнопки соцсетей — 3 в ряд ───────────────────────────────────────────────
+// ─── Анимации соцсетей ───────────────────────────────────────────────────────
+
+@keyframes socialPulseTg {
+    0%   { box-shadow: 0 0 0 0 rgba(42, 171, 238, 0.75); }
+    65%  { box-shadow: 0 0 0 12px rgba(42, 171, 238, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(42, 171, 238, 0); }
+}
+@keyframes socialPulseVb {
+    0%   { box-shadow: 0 0 0 0 rgba(115, 96, 242, 0.75); }
+    65%  { box-shadow: 0 0 0 12px rgba(115, 96, 242, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(115, 96, 242, 0); }
+}
+@keyframes socialPulseIg {
+    0%   { box-shadow: 0 0 0 0 rgba(225, 48, 108, 0.65); }
+    65%  { box-shadow: 0 0 0 12px rgba(225, 48, 108, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(225, 48, 108, 0); }
+}
+@keyframes socialPulseWa {
+    0%   { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.75); }
+    65%  { box-shadow: 0 0 0 12px rgba(37, 211, 102, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(37, 211, 102, 0); }
+}
+
+// ─── Кнопки соцсетей — 4 в ряд ───────────────────────────────────────────────
 
 .contacts__socials {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     gap: 12px;
 }
 
@@ -173,6 +196,7 @@
     justify-content: center;
     gap: 10px;
     padding: 18px 12px;
+    overflow: hidden;
 
     background: #ffffff;
     border-radius: 16px;
@@ -195,13 +219,22 @@
         flex-shrink: 0;
     }
 
-    // на очень узких экранах текст скрываем — остаётся только иконка
-    @include mobile {
-        gap: 8px;
-        padding: 16px 8px;
+    // Пульс в цвете каждой соцсети
+    &:nth-child(1) { animation: socialPulseTg 2.4s ease-out infinite; }
+    &:nth-child(2) { animation: socialPulseVb 2.4s ease-out infinite 0.6s; }
+    &:nth-child(3) { animation: socialPulseIg 2.4s ease-out infinite 1.2s; }
+    &:nth-child(4) { animation: socialPulseWa 2.4s ease-out infinite 1.8s; }
 
-        span {
-            font-size: 12px;
+    // На мобильном — только иконка, квадратная кнопка
+    @include mobile {
+        padding: 18px;
+        gap: 0;
+
+        span { display: none; }
+
+        img {
+            width: 26px;
+            height: 26px;
         }
     }
 }
