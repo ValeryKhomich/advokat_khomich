@@ -1,3 +1,20 @@
+// ─── Анимация заголовков разделов ────────────────────────────────────────────
+
+@keyframes titlePulse {
+    0%, 100% {
+        color: #e8b800;
+        text-shadow:
+            0 0 20px rgba(232, 184, 0, 0.25),
+            0 2px 8px rgba(232, 184, 0, 0.15);
+    }
+    50% {
+        color: #f5c800;
+        text-shadow:
+            0 0 40px rgba(245, 200, 0, 0.55),
+            0 4px 20px rgba(245, 200, 0, 0.3);
+    }
+}
+
 // ─── Карточки "Обо мне" ──────────────────────────────────────────────────────
 
 @keyframes about-card-in {
@@ -105,8 +122,10 @@
     &__title {
         @include fluid-text(100, 40);
         font-weight: 800;
-        color: var(--color_yellow);
+        color: #e8b800;
         padding-bottom: 10px;
+        display: inline-block;
+        animation: titlePulse 3.5s ease-in-out infinite;
     }
 
     &__description {
