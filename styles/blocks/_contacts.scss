@@ -171,14 +171,14 @@
             gap: 12px;
             margin-top: 0;
             padding: 0;
-            font-size: clamp(17px, 1.8vw, 22px);
+            font-size: clamp(18px, 2vw, 24px);
             font-weight: 800;
-            letter-spacing: 0.09em;
-            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            text-transform: none;
             border-radius: 16px;
             position: relative;
             overflow: hidden;
-            transition: background-color 0.2s ease, letter-spacing 0.2s ease;
+            transition: background-color 0.2s ease;
             // кольцо-пульс + мигание цвета
             animation:
                 callPulseHero   2s    ease-out    infinite,
@@ -219,7 +219,6 @@
 
             .contact-tile__cta {
                 background-color: #cc9a10;
-                letter-spacing: 0.14em;
             }
 
             .cta-phone-icon {
@@ -236,7 +235,6 @@
 
             .contact-tile__cta {
                 background-color: #9a6f09;
-                letter-spacing: 0.09em;
             }
         }
     }
