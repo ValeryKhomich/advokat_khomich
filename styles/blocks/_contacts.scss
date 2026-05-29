@@ -1,4 +1,4 @@
-// ─── Анимация кнопки «Позвонить» ─────────────────────────────────────────────
+// ─── Анимации кнопки «Позвонить» ─────────────────────────────────────────────
 
 @keyframes callPulse {
     0%   { box-shadow: 0 0 0 0 rgba(184, 135, 11, 0.8); }
@@ -6,9 +6,43 @@
     100% { box-shadow: 0 0 0 0 rgba(184, 135, 11, 0); }
 }
 
+@keyframes callPulseHero {
+    0%   { box-shadow: 0 4px 16px rgba(184, 135, 11, 0.45), 0 0 0 0 rgba(184, 135, 11, 0.75); }
+    55%  { box-shadow: 0 6px 28px rgba(184, 135, 11, 0.65), 0 0 0 22px rgba(184, 135, 11, 0); }
+    100% { box-shadow: 0 4px 16px rgba(184, 135, 11, 0.45), 0 0 0 0 rgba(184, 135, 11, 0); }
+}
+
+@keyframes callShimmer {
+    0%        { left: -100%; }
+    55%, 100% { left: 150%; }
+}
+
 @keyframes callArrow {
     0%, 100% { transform: translateX(0); }
     50%       { transform: translateX(4px); }
+}
+
+// кнопка «дышит» — плавно увеличивается и уменьшается
+@keyframes callBreathe {
+    0%, 100% { transform: scale(1); }
+    50%       { transform: scale(1.04); }
+}
+
+// иконка телефона «звонит» — трясётся раз в несколько секунд
+@keyframes callPhoneRing {
+    0%, 60%, 100% { transform: rotate(0deg) scale(1); }
+    63%           { transform: rotate(-20deg) scale(1.2); }
+    66%           { transform: rotate(20deg) scale(1.2); }
+    69%           { transform: rotate(-14deg) scale(1.12); }
+    72%           { transform: rotate(14deg) scale(1.12); }
+    75%           { transform: rotate(-7deg); }
+    78%           { transform: rotate(0deg); }
+}
+
+// фон кнопки мигает — светлеет и темнеет
+@keyframes callColorPulse {
+    0%, 100% { background-color: #b8870b; }
+    50%       { background-color: #d4a218; }
 }
 
 // ─── Плитки: адрес + телефон ─────────────────────────────────────────────────
@@ -29,25 +63,7 @@
         .contact-tile--phone {
             grid-row: auto;
             grid-column: 1 / -1;
-            align-items: center;
-            text-align: center;
-            padding: 24px 22px;
-            gap: 8px;
-
-            .contact-tile__value {
-                font-size: 22px;
-                font-weight: 800;
-                white-space: nowrap;
-                letter-spacing: 0.01em;
-            }
-
-            .contact-tile__cta {
-                width: 100%;
-                justify-content: center;
-                padding: 13px 20px;
-                font-size: 15px;
-                margin-top: 6px;
-            }
+            min-height: 80px;
         }
     }
 }
@@ -132,29 +148,78 @@
         }
     }
 
-    // ── Модификатор: плитка-телефон (вся кликабельна) ────────────────────────
+    // ── Модификатор: плитка-телефон — одна большая кнопка ───────────────────
 
     &--phone {
         text-decoration: none;
         cursor: pointer;
-        border: 2px solid transparent;
-        transition:
-            transform    0.2s ease,
-            box-shadow   0.2s ease,
-            border-color 0.2s ease;
+        padding: 0;
+        background: transparent;
+        box-shadow: none;
+        border: none;
+        // дыхание — кнопка живёт и зовёт нажать
+        animation: callBreathe 2.2s ease-in-out infinite;
+
+        .contact-tile__cta {
+            display: flex;
+            flex: 1;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-top: 0;
+            padding: 0;
+            font-size: clamp(17px, 1.8vw, 22px);
+            font-weight: 800;
+            letter-spacing: 0.09em;
+            text-transform: uppercase;
+            border-radius: 16px;
+            position: relative;
+            overflow: hidden;
+            // кольцо-пульс + мигание цвета
+            animation:
+                callPulseHero   2s    ease-out    infinite,
+                callColorPulse  2.2s  ease-in-out infinite;
+
+            &::after {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 55%;
+                height: 100%;
+                background: linear-gradient(
+                    120deg,
+                    transparent 15%,
+                    rgba(255, 255, 255, 0.42) 50%,
+                    transparent 85%
+                );
+                animation: callShimmer 2s ease-in-out infinite;
+                pointer-events: none;
+            }
+        }
+
+        // иконка телефона внутри кнопки
+        .cta-phone-icon {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+            animation: callPhoneRing 3.5s ease-in-out infinite;
+        }
 
         @include hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(184, 135, 11, 0.22);
-            border-color: #b8870b;
+            // останавливаем дыхание и фиксируем чуть увеличенным
+            animation-play-state: paused;
+            transform: scale(1.04);
 
             .contact-tile__cta {
                 background: #9a6f09;
-                gap: 10px;
                 animation-play-state: paused;
 
-                svg { animation-play-state: paused; }
+                &::after { animation-play-state: paused; }
             }
+
+            .cta-phone-icon { animation-play-state: paused; }
         }
     }
 }
